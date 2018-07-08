@@ -1,0 +1,121 @@
+{
+   "nav_icon": "chester_icon.png",
+   "firstPhotoId":"112371",
+   "firstPhotoRotation":150,
+   "soundEffects": {
+      "navButton": {
+         "onEnter": {
+            "uri": "switch-flip.wav",
+            "attributionUri": "https://www.freesound.org/people/ianstargem/sounds/278205/"
+         },
+         "onClick": {
+            "uri": "menu-click.wav",
+            "attributionUri": "https://www.freesound.org/people/fins/sounds/146721/"
+         }
+      },
+      "infoButton": {
+         "onEnter": {
+            "uri": "switch-flip.wav",
+            "attributionUri": "https://www.freesound.org/people/ianstargem/sounds/278205/"
+         }
+      },
+      "ambient": {
+         "uri": "bellbird-morning-chorus.mp3",
+         "attributionUri": "https://www.freesound.org/people/PapercutterJohn/sounds/322031/",
+         "loop": true,
+         "volume": 0.50
+      }
+   },
+   "photos":{
+      "112379":{
+         "rotationOffset": 380,
+         "uri":"the-chester--v112379.prefilter.jpg",
+         "tooltips":[
+            {
+               "text":"Outdoors",
+               "rotationY": 0,
+               "linkedPhotoId":"112371"
+            },
+            {
+               "type": "panelimage",
+               "rotationY": -24.525,
+               "width": 1.280,
+               "height": 1.50,
+               "source": "01.jpg",
+               "text": "The Koru is one of the most used within carving, as it can range from being the carved object itself to an element of design drawn or carved on a flat surface."
+
+            },
+            {
+               "type": "panelimage",
+               "rotationY": 112,
+               "width": 1.280,
+               "height": 1.50,
+               "source": "02.jpg",
+               "text": "The Koru is one of the most used within carving, as it can range from being the carved object itself to an element of design drawn or carved on a flat surface."
+
+            },
+            {
+               "type": "panelimage",
+               "rotationY": 140,
+               "width": 1.280,
+               "height": 1.50,
+               "source": "03.jpg",
+               "text": "The Koru is one of the most used within carving, as it can range from being the carved object itself to an element of design drawn or carved on a flat surface."
+
+            },
+            {
+               "type": "textblock",
+               "title": "Design Significance",
+               "text": "The Maori artistic vocabulary was filled with a variety of motifs and symbols, many of which still hold their importance and meaning in the modern day.",
+               "rotationY": 10,
+               "width": 1.5,
+               "height": 1.5
+            },
+            {
+               "type": "textblock",
+               "title": "Design Significance",
+               "text": "The Koru is one of the most used within carving, as it can range from being the carved object itself to an element of design drawn or carved on a flat surface. The diversity of koru has been used since pre-classic Maori times and most likely dates back to their origin. Today it is still a popular symbol for its adopted meaning and design aesthetic for traditional styled and more modern Maori art and carving.",
+               "rotationY": 180,
+               "width": 1.5,
+               "height": 1.5
+            },
+            {
+               "type": "textblock",
+               "title": "Tall Human",
+               "text": "Age Unknown",
+               "rotationY": 205,
+               "width": 1.5,
+               "height": 1.5
+            }
+         ]
+      },
+
+      "112371":{
+         "rotationOffset": 260,
+         "uri":"the-chester--v112371.prefilter.jpg",
+         "tooltips":[
+            {
+               "text":"AUT Marae",
+               "rotationY": -20,
+               "linkedPhotoId":"112379"
+            },
+            {
+               "type": "textblock",
+               "title": "The wharenui (meeting house)",
+               "text": "Our marae’s meeting house was named Te Pūrengi by the local iwi Ngāti Whātua. The name represents the ropes which hold the mast of a waka in place. Te Pūrengi is the focal point of Ngā Wai o Horotiu.",
+               "rotationY": -40,
+               "width": 1.0,
+               "height": 1.0
+            },
+            {
+               "type": "textblock",
+               "title": "The wharekai (dining room)",
+               "text": "Our dining room is called te Kaipara after the Kaipara Harbour. Ngāti Whātua traversed the Kaipara from the North. The word ‘para’ is a reference to the para fern which is a traditional Māori delicacy. Kai-para means ‘to eat the para fern’. It’s a fitting name for our dining room. Kaipara – the house of gourmet food.",
+               "rotationY": 60,
+               "width": 1.0,
+               "height": 1.0
+            }
+         ]
+      }
+   }
+}
