@@ -15,101 +15,111 @@
 'use strict';
 
 import React from 'react';
-import {
-  asset,
-  Image,
-  Text,
-  Video,
-  View,
-} from 'react-vr';
+import {asset, Image, MediaPlayerState, Text, Video, VideoControl, View} from 'react-vr';
 
 /**
  * Tooltip encapsulates the different tooltip types used with the InfoButton
  * and renders either an image, image with text overlay, or text block.
+ *
+ * When using with CylinderLayer, set pixelsPerMeter to convert units, otherise
+ * set translateZ to specify distance between camera and tooltip.
  */
 class Tooltip extends React.Component {
+  static defaultProps = {
+    pixelsPerMeter: 1,
+  };
 
   constructor(props) {
-    super();
+    super(props);
   }
 
-  // Below are Functional Components.
-  // Stateless components can use this syntax instead of extending React.Component
+  render() {
+    const tooltip = this.props.tooltip;
+    const PPM = this.props.pixelsPerMeter;
 
-  ImageTooltip(props) {
+    switch (this.props.tooltip.type) {
+      case 'image':
+        return <ImageTooltip tooltip={tooltip} pixelsPerMeter={PPM} />;
+      case 'panelimage':
+        return <PanelImageTooltip tooltip={tooltip} pixelsPerMeter={PPM} />;
+      case 'textblock':
+        return <TextBlockTooltip tooltip={tooltip} pixelsPerMeter={PPM} />;
+      case 'video':
+        return <VideoTooltip tooltip={tooltip} pixelsPerMeter={PPM} />;
+      default:
+        return <Text style={{backgroundColor: 'red'}}>Missing Tooltip</Text>;
+    }
+  }
+}
 
+class ImageTooltip extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const tooltip = this.props.tooltip;
+    const PPM = this.props.pixelsPerMeter;
     const fontSize = {
-      attrib: 0.05,
+      attrib: 0.05 * PPM,
     };
 
-    return(
+    return (
       <Image
         style={{
           borderColor: '#777879',
-          borderWidth: 0.01,
-          height: props.tooltip.height,
+          borderWidth: 0.01 * PPM,
+          height: tooltip.height * PPM,
           justifyContent: 'flex-end',
-          width: props.tooltip.width,
+          width: tooltip.width * PPM,
         }}
-        source={asset(props.tooltip.source)}
-      >
-      {props.tooltip.attribution && 
-        <Text
-          style={{
-            fontSize: fontSize.attrib,
-            right: 0.02,
-            textAlign: 'right',
-            textAlignVertical: 'bottom',
-          }}
-        >
-          {props.tooltip.attribution}
-        </Text>
-      }
+        source={asset(tooltip.source)}>
+        {tooltip.attribution &&
+          <Text
+            style={{
+              fontSize: fontSize.attrib,
+              right: 0.02 * PPM,
+              textAlign: 'right',
+              textAlignVertical: 'bottom',
+            }}>
+            {tooltip.attribution}
+          </Text>}
       </Image>
     );
   }
+}
 
-  VideoTooltip(props) {
-
-    return(
-      <Video
-        style={{
-          height: props.tooltip.height,
-          width: props.tooltip.width,
-        }}
-        source={asset(props.tooltip.source)}
-        muted={props.tooltip.muted}
-      >
-      </Video>
-    );
+class PanelImageTooltip extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
-  PanelImageTooltip(props) {
-
+  render() {
+    const tooltip = this.props.tooltip;
+    const PPM = this.props.pixelsPerMeter;
     const fontSize = {
-      attrib: 0.05,
-      text: 0.1,
-      title: 0.15,
+      attrib: 0.05 * PPM,
+      text: 0.1 * PPM,
+      title: 0.15 * PPM,
     };
-    const margin = 0.05;
+    const margin = 0.05 * PPM;
     const titleOpacity = 0.60;
 
-    return(
+    return (
       <View
         style={{
           borderColor: '#777879',
-          borderWidth: 0.01,
-        }}
-      >
+          borderWidth: 0.01 * PPM,
+        }}>
         <Image
           style={{
-            height: props.tooltip.height,
-            width: props.tooltip.width,
+            height: tooltip.height * PPM,
+            width: tooltip.width * PPM,
             justifyContent: 'flex-end',
           }}
-          source={asset(props.tooltip.source)}>
+          source={asset(tooltip.source)}>
 
-          {props.tooltip.title && 
+          {tooltip.title &&
             <View>
               <View
                 style={{
@@ -130,124 +140,137 @@ class Tooltip extends React.Component {
                   marginLeft: margin,
                   marginRight: margin,
                   textAlignVertical: 'bottom',
-                }}
-              >
-                {props.tooltip.title}
+                }}>
+                {tooltip.title}
               </Text>
-            </View>
-          }
+            </View>}
         </Image>
 
         <View
           style={{
             backgroundColor: 'black',
             // Place attribution in bottom margin.
-            paddingBottom: props.tooltip.attribution ? 0 : margin,
+            paddingBottom: tooltip.attribution ? 0 : margin,
             paddingLeft: margin,
             paddingRight: margin,
             paddingTop: 0,
-            width: props.tooltip.width,
-          }}
-        >
+            width: tooltip.width * PPM,
+          }}>
           <Text
             style={{
               color: 'white',
               fontSize: fontSize.text,
               textAlignVertical: 'center',
-            }}
-          >
-            {props.tooltip.text}
+            }}>
+            {tooltip.text}
           </Text>
-          {props.tooltip.attribution && 
+          {tooltip.attribution &&
             <Text
               style={{
                 fontSize: fontSize.attrib,
-                right: -margin + 0.02,
+                right: -margin + 0.02 * PPM,
                 textAlign: 'right',
-              }}
-            >
-              {props.tooltip.attribution}
-            </Text>
-          }
+              }}>
+              {tooltip.attribution}
+            </Text>}
         </View>
       </View>
     );
   }
+}
 
-  TextblockTooltip(props) {
+class TextBlockTooltip extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
+  render() {
+    const tooltip = this.props.tooltip;
+    const PPM = this.props.pixelsPerMeter;
     const fontSize = {
-      attrib: 0.05,
-      text: 0.1,
-      title: 0.15,
+      attrib: 0.05 * PPM,
+      text: 0.1 * PPM,
+      title: 0.15 * PPM,
     };
 
-    return(
+    return (
       <View
         style={{
           backgroundColor: 'black',
-          padding: 0.1,
-        }}
-      >
+          padding: 0.1 * PPM,
+        }}>
         <Text
           style={{
             color: 'white',
             fontSize: fontSize.title,
-            width: props.tooltip.width,
-          }}
-        >
-          {props.tooltip.title}
+            width: tooltip.width * PPM,
+          }}>
+          {tooltip.title}
         </Text>
-        {props.tooltip.title &&
+        {tooltip.title &&
           <View
             style={{
               // If we have a title, make thin line to separate title and text.
               backgroundColor: '#777879',
-              height: 0.01, 
-              width: props.tooltip.width,
+              height: 0.01 * PPM,
+              width: tooltip.width * PPM,
             }}
-          />
-        }
+          />}
         <Text
           style={{
             color: 'white',
             fontSize: fontSize.text,
-            width: props.tooltip.width,
-          }}
-        >
-          {props.tooltip.text}
+            width: tooltip.width * PPM,
+          }}>
+          {tooltip.text}
         </Text>
-        {props.tooltip.attribution && 
+        {tooltip.attribution &&
           <Text
             style={{
               fontSize: fontSize.attrib,
-              right: 0.02,
+              right: 0.02 * PPM,
               textAlign: 'right',
-            }}
-          >
-            {props.tooltip.attribution}
-          </Text>
-        }
+            }}>
+            {tooltip.attribution}
+          </Text>}
       </View>
     );
   }
+}
 
-  render() {
-
-    switch(this.props.tooltip.type) {
-      case 'image':
-        return(<this.ImageTooltip tooltip={this.props.tooltip} />);
-      case 'video':
-        return(<this.VideoTooltip tooltip={this.props.tooltip} />);
-      case 'panelimage':
-        return(<this.PanelImageTooltip tooltip={this.props.tooltip} />);
-      case 'textblock':
-        return(<this.TextblockTooltip tooltip={this.props.tooltip} />);
-      default:
-        return(<Text style={{backgroundColor: 'red'}}>Missing Tooltip</Text>);
-    }
+class VideoTooltip extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      playerState: new MediaPlayerState({autoPlay: true, muted: true}),
+    };
   }
 
+  render() {
+    const tooltip = this.props.tooltip;
+    const PPM = this.props.pixelsPerMeter;
+
+    return (
+      <View>
+        <Video
+          style={{
+            height: tooltip.height * PPM,
+            width: tooltip.width * PPM,
+          }}
+          source={asset(tooltip.source)}
+          playerState={this.state.playerState}
+        />
+        <VideoControl
+          style={{
+            height: 0.2 * PPM,
+            width: tooltip.width * PPM,
+          }}
+          fontSize={18}
+          playerState={this.state.playerState}
+        />
+      </View>
+    );
+  }
 }
 
 module.exports = Tooltip;

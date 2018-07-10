@@ -29,7 +29,7 @@
    "photos":{
       "112379":{
          "rotationOffset": 380,
-         "uri":"the-chester--v112379.prefilter.jpg",
+         "uri":"insidethemarae.webm",
          "tooltips":[
             {
                "text":"Outdoors",
@@ -78,21 +78,13 @@
                "rotationY": 180,
                "width": 1.5,
                "height": 1.5
-            },
-            {
-               "type": "textblock",
-               "title": "Tall Human",
-               "text": "Age Unknown",
-               "rotationY": 205,
-               "width": 1.5,
-               "height": 1.5
             }
          ]
       },
 
       "112371":{
          "rotationOffset": 260,
-         "uri":"the-chester--v112371.prefilter.jpg",
+         "uri":"outsidethemarae.webm",
          "tooltips":[
             {
                "text":"AUT Marae",
