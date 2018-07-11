@@ -26,7 +26,7 @@ import {asset, Image, MediaPlayerState, Text, Video, VideoControl, View} from 'r
  */
 class Tooltip extends React.Component {
   static defaultProps = {
-    pixelsPerMeter: 1,
+    pixelsPerMeter: 0.5,
   };
 
   constructor(props) {
@@ -61,7 +61,7 @@ class ImageTooltip extends React.Component {
     const tooltip = this.props.tooltip;
     const PPM = this.props.pixelsPerMeter;
     const fontSize = {
-      attrib: 0.05 * PPM,
+      attrib: 0.02 * PPM,
     };
 
     return (
